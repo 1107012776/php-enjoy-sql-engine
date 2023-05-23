@@ -143,7 +143,7 @@ class SPDO extends \PDO
 
 
     /**
-     * 查询
+     * 查询列表
      * @param $sql
      * @param $data
      * @return array|bool
@@ -165,7 +165,7 @@ class SPDO extends \PDO
     }
 
     /**
-     * 查询
+     * 查询一个
      * @param $sql
      * @param $data
      * @return array|bool
@@ -187,11 +187,35 @@ class SPDO extends \PDO
     }
 
     /**
+     * 更新
      * @param $sql
      * @param $data
      * @return int
      */
     public function update($sql, $data = [])
+    {
+        if ($sql == '') {
+            return false;
+        }
+        $this->reset();
+        $statement = $this->prepare($sql, array(\PDO::ATTR_CURSOR => $this->attr_cursor));
+        $res = $statement->execute($this->getBuildData($data));
+        if (!empty($res)) {
+            $tmp = $statement->rowCount();
+            return $tmp;
+        }
+        $this->error = $statement->errorInfo();
+        return false;
+    }
+
+
+    /**
+     * 删除
+     * @param $sql
+     * @param $data
+     * @return int
+     */
+    public function delete($sql, $data = [])
     {
         if ($sql == '') {
             return false;
@@ -216,6 +240,7 @@ class SPDO extends \PDO
     }
 
     /**
+     * 插入数据
      * @param $sql
      * @param $data
      * @return int
