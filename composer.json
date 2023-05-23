@@ -1,0 +1,28 @@
+{
+  "name":"lys/php-enjoy-tpl-engine",
+  "license": "Apache-2.0",
+  "authors": [
+    {
+      "name": "lys",
+      "email": "1107012776@qq.com",
+      "homepage": "https://github.com/1107012776",
+      "role": "Developer"
+    }
+  ],
+  "require": {
+    "php": ">=5.6"
+  },
+  "require-dev": {
+
+  },
+  "autoload": {
+    "psr-4": {
+      "SqlTplEngine\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "SqlTplEngine\\Test\\": "tests/"
+    }
+  }
+}
