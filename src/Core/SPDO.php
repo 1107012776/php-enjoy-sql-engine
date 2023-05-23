@@ -61,21 +61,11 @@ class SPDO extends \PDO
         parent::__construct($dsn, $username, $passwd, $options);
     }
 
-    public static function build($dsn, $user, $pass, $option = [])
+    public static function build($dsn, $user, $pass, $option = [], $queryStr = 'set names utf8mb4;')
     {
         $dbh = new SPDO($dsn, $user, $pass, $option);
-        $dbh->query('set names utf8mb4;');
+        $dbh->query($queryStr);
         return $dbh;
-    }
-
-    public function buildInWhereColumnStr($arr = [])
-    {
-        $str = '';
-        foreach ($arr as $value) {
-            $str .= sprintf(",'%s'", $value);
-        }
-        $str = trim($str, ',');
-        return $str;
     }
 
     public function setLoadTplBasePath($tplBasePath)
