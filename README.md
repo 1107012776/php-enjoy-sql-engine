@@ -45,7 +45,7 @@ PHP Enjoy Template Engine,  MySQL数据库模板引擎
     }
     $pdo = getPdo();
     //insert插入
-    $info = $pdo->insert($pdo->loadTplParse('tplFileName.order.insert'), [
+    $insertCountRes = $pdo->insert($pdo->loadTplParse('tplFileName.order.insert'), [
         'product_id' => 1,
         'state' => 1
     ]);

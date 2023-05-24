@@ -115,7 +115,7 @@ class SPDO extends \PDO
         }
         $childData = [];
         foreach ($data as $namespace => $sql) {
-            if (preg_match_all('/#sql\("(\w+)"\)/i', $sql, $matches)) {
+            if (preg_match_all('/#sql\("(\w+)\\"\)/i', $sql, $matches)) {
                 list($allSqlArr, $shortSqlArr) = $matches;
                 foreach ($shortSqlArr as $index => $value) {
                     $find1 = '#sql("' . $value . '")';
