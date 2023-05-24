@@ -5,8 +5,8 @@ PHP Enjoy Template Engine,  MySQL数据库模板引擎
 一款迅速查询插入更新删除的MySQL模板引擎，主要针对开发者数据处理的时候使用，可以迅速编写数据处理脚本
 
 
-# 入门
-# 创建数据库，创建表
+# 入门 (具体查看tests目录)
+## 创建数据库，创建表
 ```sql
 CREATE TABLE `order` (
   `id` int NOT NULL AUTO_INCREMENT,
@@ -15,7 +15,7 @@ CREATE TABLE `order` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 ```
-# 创建一个模板
+## 创建一个模板 tplFileName.sql
 ```sql
     #namespace("order")
     #sql("insert")
@@ -40,6 +40,7 @@ CREATE TABLE `order` (
     #end
     #end("order")
 ```
+## 代码实战
 ```php
     use SqlTplEngine\Core\SPDO;
     function getPdo(){
