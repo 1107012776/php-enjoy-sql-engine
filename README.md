@@ -6,6 +6,16 @@ PHP Enjoy Template Engine,  MySQL数据库模板引擎
 
 
 # 入门
+# 创建数据库，创建表
+```sql
+CREATE TABLE `order` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `state` tinyint DEFAULT '0',
+  `product_id` int unsigned DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+```
+# 创建一个模板
 ```sql
     #namespace("order")
     #sql("insert")
