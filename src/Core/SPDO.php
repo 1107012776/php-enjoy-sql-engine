@@ -82,8 +82,8 @@ class SPDO extends \PDO
         }
         $arr = explode('.', $tplFilePath);
         $sql = file_get_contents($this->tplBasePath . $arr[0] . '.sql');
-        $sql = preg_replace('/#remark\(.*\)/i', '', $sql);
-        if (preg_match_all('/#namespace\(\\"(\w+)\\"\)/i', $sql, $matches)) {
+        $sql = preg_replace('/#remark\(".*"\)/i', '', $sql);
+        if (preg_match_all('/#namespace\("(\w+)"\)/i', $sql, $matches)) {
             list($allNamespaceArr, $shortNamespaceArr) = $matches;
             $allNamespaceArrCount = count(array_unique($allNamespaceArr));
             $shortNamespaceArrCount = count(array_unique($shortNamespaceArr));
@@ -94,7 +94,7 @@ class SPDO extends \PDO
                 return '';
             }
         }
-        if (preg_match_all('/#end\(\\"(\w+)\\"\)/i', $sql, $matches)) {
+        if (preg_match_all('/#end\("(\w+)"\)/i', $sql, $matches)) {
             list($allEndArr, $shortEndArr) = $matches;
             $allEndArrCount = count(array_unique($allEndArr));
             $shortEndArrCount = count(array_unique($shortEndArr));
@@ -115,7 +115,7 @@ class SPDO extends \PDO
         }
         $childData = [];
         foreach ($data as $namespace => $sql) {
-            if (preg_match_all('/#sql\(\\"(\w+)\\"\)/i', $sql, $matches)) {
+            if (preg_match_all('/#sql\("(\w+)"\)/i', $sql, $matches)) {
                 list($allSqlArr, $shortSqlArr) = $matches;
                 foreach ($shortSqlArr as $index => $value) {
                     $find1 = '#sql("' . $value . '")';

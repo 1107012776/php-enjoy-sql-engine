@@ -6,6 +6,30 @@ PHP Enjoy Template Engine,  MySQL数据库模板引擎
 
 
 # 入门
+```sql
+#namespace("order")
+#sql("insert")
+#remark("注释：插入")
+insert into `order`(`product_id`,`state`)values(:product_id,:state);
+#end
+#sql("list")
+#remark("注释：查询列表")
+select * from `order` where product_id = :product_id;
+#end
+#sql("view")
+#remark("注释：查询单个")
+select * from `order` where id = :id;
+#end
+#sql("update")
+#remark("注释：更新")
+update  `order` set state = :update_state where id = :id;
+#end
+#sql("delete")
+#remark("注释：删除")
+delete from `order` where product_id = :product_id;
+#end
+#end("order")
+```
 ```php
    use SqlTplEngine\Core\SPDO;
    function getPdo(){
@@ -20,12 +44,31 @@ PHP Enjoy Template Engine,  MySQL数据库模板引擎
        return $pdo;
    }
    $pdo = getPdo();
-   //未写完，后面补充
+   //insert插入
+   $info = $pdo->insert($pdo->loadTplParse('tplFileName.order.insert'), [
+       'product_id' => 1,
+       'state' => 1
+   ]);
    
-
-    
-
+   //查询单个
+   $info = $pdo->getOne($pdo->loadTplParse('tplFileName.order.view'), [
+       'id' => 1
+   ]);
    
+   //列表查询
+   $list = $pdo->getAll($pdo->loadTplParse('tplFileName.order.list'), [
+       'product_id' => 1
+   ]);
+   
+   //更新
+   $changeCountRes = $pdo->update($pdo->loadTplParse('tplFileName.order.update'), [
+       'id' => 1,
+       'update_state' => 1
+   ]);   
 
+   //删除
+   $deleteCountRes = $pdo->delete($pdo->loadTplParse('tplFileName.order.delete'), [
+       'product_id' => 1
+   ]);   
 
 ```
