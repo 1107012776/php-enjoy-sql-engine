@@ -1,5 +1,5 @@
-# php-enjoy-tpl-engine
-PHP Enjoy Template Engine,  MySQL数据库模板引擎
+# php-enjoy-Sql-engine
+PHP Enjoy Sql Engine,  MySQL数据库模板引擎
 
 # 介绍
 一款迅速查询插入更新删除的MySQL模板引擎，主要针对开发者数据处理的时候使用，可以迅速编写数据处理脚本。
