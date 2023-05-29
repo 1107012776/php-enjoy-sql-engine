@@ -1,4 +1,5 @@
 <?php
+
 namespace SqlTplEngine\Core;
 
 class SPDO extends \PDO
