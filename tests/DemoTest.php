@@ -37,12 +37,12 @@ class DemoTest extends TestCase
             'product_id' => 1,
             'state' => 2
         ]);
-        $this->assertEquals(!empty($insertCountRes), true);
+        $this->assertEquals(!empty($insertCountRes) && $insertCountRes == 1, true);
 
-
+        $insertId = $pdo->lastInsertId();
         //查询单个
         $info = $pdo->getOne($pdo->loadTplParse('tplFileName.order.view'), [
-            'id' => $pdo->lastInsertId()
+            'id' => $insertId
         ]);
         $this->assertEquals(!empty($info), true);
 
@@ -51,22 +51,22 @@ class DemoTest extends TestCase
             'product_id' => 1
         ]);
 
-        $this->assertEquals(!empty($list), true);
+        $this->assertEquals(!empty($list) && count($list) == 1, true);
 
         //更新
         $changeCountRes = $pdo->update($pdo->loadTplParse('tplFileName.order.update'), [
-            'id' => 1,
+            'id' => $insertId,
             'update_state' => 1
         ]);
 
-        $this->assertEquals(!empty($changeCountRes), true);
+        $this->assertEquals(!empty($changeCountRes) && $changeCountRes == 1, true);
 
         //删除
         $deleteCountRes = $pdo->delete($pdo->loadTplParse('tplFileName.order.delete'), [
             'product_id' => 1
         ]);
 
-        $this->assertEquals(!empty($deleteCountRes), true);
+        $this->assertEquals(!empty($deleteCountRes) && $deleteCountRes == 1, true);
     }
 
 }
