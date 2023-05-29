@@ -14,8 +14,7 @@ use PHPUnit\Framework\TestCase;
 use SqlTplEngine\Core\SPDO;
 
 
-
-class DemoTest  extends TestCase
+class DemoTest extends TestCase
 {
     public function getPdo()
     {
@@ -30,7 +29,7 @@ class DemoTest  extends TestCase
         return $pdo;
     }
 
-    public function startTest()
+    public function testStart()
     {
         $pdo = $this->getPdo();
         //insert插入
@@ -38,34 +37,36 @@ class DemoTest  extends TestCase
             'product_id' => 1,
             'state' => 2
         ]);
+        $this->assertEquals(!empty($insertCountRes), true);
 
-        var_dump($insertCountRes);
 
         //查询单个
         $info = $pdo->getOne($pdo->loadTplParse('tplFileName.order.view'), [
             'id' => $pdo->lastInsertId()
         ]);
+        $this->assertEquals(!empty($info), true);
 
-        var_dump($info);
         //列表查询
         $list = $pdo->getAll($pdo->loadTplParse('tplFileName.order.list'), [
             'product_id' => 1
         ]);
-        var_dump($list);
+
+        $this->assertEquals(!empty($list), true);
 
         //更新
         $changeCountRes = $pdo->update($pdo->loadTplParse('tplFileName.order.update'), [
             'id' => 1,
             'update_state' => 1
         ]);
-        var_dump($changeCountRes);
+
+        $this->assertEquals(!empty($changeCountRes), true);
 
         //删除
         $deleteCountRes = $pdo->delete($pdo->loadTplParse('tplFileName.order.delete'), [
             'product_id' => 1
         ]);
 
-        var_dump($deleteCountRes);
+        $this->assertEquals(!empty($deleteCountRes), true);
     }
 
 }
