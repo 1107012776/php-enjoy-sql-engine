@@ -19,7 +19,7 @@ class SPDO extends \PDO
     {
         $this->_startTransCount++;
         if ($this->_startTransCount <= 1) {
-            return $this->beginTransaction();
+            return parent::beginTransaction();
         }
         return true;
     }
