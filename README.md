@@ -1,4 +1,4 @@
-# php-enjoy-Sql-engine
+# php-enjoy-sql-engine
 PHP Enjoy Sql Engine,  MySQL数据库模板引擎
 
 # 介绍
