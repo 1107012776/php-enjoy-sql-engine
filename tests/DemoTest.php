@@ -67,6 +67,17 @@ class DemoTest extends TestCase
         ]);
 
         $this->assertEquals(!empty($deleteCountRes) && $deleteCountRes == 1, true);
+        //用户表操作
+        //insert插入
+        $insertCountRes = $pdo->insert($pdo->loadTplParse('tplFileName.user.insert'), [
+            'username' => 'lys',
+            'nickname' => 'SqlTplEngine作者'
+        ]);
+        $this->assertEquals(!empty($insertCountRes) && $insertCountRes == 1, true);
+        $list = $pdo->getAll($pdo->loadTplParse('tplFileName.user.list'), [
+            'username' => 'lys'
+        ]);
+        $this->assertEquals(!empty($list) && count($list) >= 1, true);
     }
 
 }

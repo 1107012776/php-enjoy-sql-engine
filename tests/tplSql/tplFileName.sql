@@ -29,3 +29,16 @@ from `order`
 where product_id = :product_id;
 #end
 #end("order")
+#namespace("user")
+#sql("insert")
+#remark("注释：插入")
+insert into `user`(`username`, `nickname`)
+values (:username, :nickname);
+#end
+#sql("list")
+#remark("注释：查询列表")
+select *
+from `user`
+where username = :username;
+#end
+#end("user")
