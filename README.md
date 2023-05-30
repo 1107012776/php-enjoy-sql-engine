@@ -5,6 +5,8 @@ PHP Enjoy Sql Engine,  MySQL数据库模板引擎
 一款迅速查询插入更新删除的MySQL模板引擎，主要针对开发者数据处理的时候使用，可以迅速编写数据处理脚本。
 优点：可以把sql和php代码分离，php代码专注于处理业务逻辑。
 
+# 安装
+composer require lys/php-enjoy-sql-engine
 
 # 入门 (具体查看tests目录)
 ## 创建数据库，创建表
