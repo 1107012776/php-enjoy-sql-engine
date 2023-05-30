@@ -1,5 +1,12 @@
 <?php
-
+/**
+ * SqlTplEngine  file.
+ * @author 林玉山 <1107012776@qq.com>
+ * @link https://www.developzhe.com/
+ * @package https://github.com/1107012776/php-enjoy-sql-engine
+ * @copyright Copyright &copy; 2019-2100
+ * @license https://github.com/1107012776/php-enjoy-sql-engine/blob/main/LICENSE
+ */
 namespace SqlTplEngine\Test;
 
 $file_load_path = __DIR__ . '/../../../autoload.php';
