@@ -7,6 +7,7 @@
  * @copyright Copyright &copy; 2019-2100
  * @license https://github.com/1107012776/php-enjoy-sql-engine/blob/main/LICENSE
  */
+
 namespace SqlTplEngine\Test;
 
 $file_load_path = __DIR__ . '/../../../autoload.php';
@@ -113,7 +114,8 @@ class DemoTest extends TestCase
     /**
      * 事务测试
      */
-    public function testTrans(){
+    public function testTrans()
+    {
         $pdo = $this->getPdo();
         $pdo->startTrans();
         //insert插入
