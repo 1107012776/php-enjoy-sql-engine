@@ -187,6 +187,66 @@ class DemoTest extends TestCase
         $this->assertEquals(!empty($deleteCountRes) && $deleteCountRes == 1, true);
     }
 
+    /**
+     * 事务测试
+     */
+    public function testTrans()
+    {
+        $pdo = $this->getPdo();
+        $pdo->startTrans();
+        //insert插入
+        $insertCountRes = $pdo->insert($pdo->loadTplParse('tplFileName.order.insert'), [
+            'product_id' => 1,
+            'state' => 2
+        ]);
+        $this->assertEquals(!empty($insertCountRes) && $insertCountRes == 1, true);
+        $insertId = $pdo->lastInsertId();
+        $pdo->rollBack();
+        //查询单个
+        $info = $pdo->getOne($pdo->loadTplParse('tplFileName.order.view'), [
+            'id' => $insertId
+        ]);
+        $this->assertEquals(empty($info), true);
+        $pdo->startTrans();
+        $pdo->startTrans();
+        //insert插入
+        $insertCountRes = $pdo->insert($pdo->loadTplParse('tplFileName.order.insert'), [
+            'product_id' => 1,
+            'state' => 2
+        ]);
+        $this->assertEquals(!empty($insertCountRes) && $insertCountRes == 1, true);
+        $insertId = $pdo->lastInsertId();
+        $pdo->rollBack();
+        $pdo->rollBack();
+        //查询单个
+        $info = $pdo->getOne($pdo->loadTplParse('tplFileName.order.view'), [
+            'id' => $insertId
+        ]);
+        $this->assertEquals(empty($info), true);
+        $pdo->startTrans();
+        $pdo->startTrans();
+        //insert插入
+        $insertCountRes = $pdo->insert($pdo->loadTplParse('tplFileName.order.insert'), [
+            'product_id' => 1,
+            'state' => 2
+        ]);
+        $this->assertEquals(!empty($insertCountRes) && $insertCountRes == 1, true);
+        $insertId = $pdo->lastInsertId();
+        $pdo->commit();
+        $pdo->commit();
+        //查询单个
+        $info = $pdo->getOne($pdo->loadTplParse('tplFileName.order.view'), [
+            'id' => $insertId
+        ]);
+        $this->assertEquals(!empty($info), true);
+        //删除
+        $deleteCountRes = $pdo->delete($pdo->loadTplParse('tplFileName.order.delete'), [
+            'product_id' => 1
+        ]);
+        $this->assertEquals(!empty($deleteCountRes) && $deleteCountRes == 1, true);
+
+    }
+
 }
 
 
