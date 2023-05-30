@@ -41,4 +41,16 @@ select *
 from `user`
 where username = :username;
 #end
+#sql("where_list")
+#remark("注释：查询列表（不安全，通过占位替换赋值变量给模板）")
+select *
+from `user`
+where ${where};
+#end
+#sql("delete")
+#remark("注释：删除")
+delete
+from `user`
+where username = :username;
+#end
 #end("user")

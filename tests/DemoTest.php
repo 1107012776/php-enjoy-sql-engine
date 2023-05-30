@@ -68,16 +68,38 @@ class DemoTest extends TestCase
 
         $this->assertEquals(!empty($deleteCountRes) && $deleteCountRes == 1, true);
         //用户表操作
-        //insert插入
+        //insert插入 第一条数据
         $insertCountRes = $pdo->insert($pdo->loadTplParse('tplFileName.user.insert'), [
             'username' => 'lys',
             'nickname' => 'SqlTplEngine作者'
         ]);
         $this->assertEquals(!empty($insertCountRes) && $insertCountRes == 1, true);
+        //列表查询
         $list = $pdo->getAll($pdo->loadTplParse('tplFileName.user.list'), [
             'username' => 'lys'
         ]);
-        $this->assertEquals(!empty($list) && count($list) >= 1, true);
+        $this->assertEquals(!empty($list) && count($list) == 1, true);
+        //insert插入 第二条数据
+        $insertCountRes = $pdo->insert($pdo->loadTplParse('tplFileName.user.insert'), [
+            'username' => 'lys-1',
+            'nickname' => 'SqlTplEngine作者'
+        ]);
+        $this->assertEquals(!empty($insertCountRes) && $insertCountRes == 1, true);
+        //列表查询（不安全，通过占位替换赋值变量给模板）
+        $list = $pdo->getAll($pdo->loadTplParse('tplFileName.user.where_list', [
+            'where' => 'username = \'lys\''
+        ]));
+        $this->assertEquals(!empty($list) && count($list) == 1, true);
+        //删除
+        $deleteCountRes = $pdo->delete($pdo->loadTplParse('tplFileName.user.delete'), [
+            'username' => 'lys'
+        ]);
+        $this->assertEquals(!empty($deleteCountRes) && $deleteCountRes == 1, true);
+        //删除
+        $deleteCountRes = $pdo->delete($pdo->loadTplParse('tplFileName.user.delete'), [
+            'username' => 'lys-1'
+        ]);
+        $this->assertEquals(!empty($deleteCountRes) && $deleteCountRes == 1, true);
     }
 
 }
