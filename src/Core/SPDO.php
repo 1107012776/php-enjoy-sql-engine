@@ -296,8 +296,8 @@ class SPDO extends \PDO
 
     protected function checkExec($sql, $method)
     {
-        $lowerSql = strtolower($sql);
-        if (!strstr($lowerSql, $method . ' ')) {
+        $lowerSql = strtolower(trim($sql));
+        if (!preg_match('/^'.$method.'/i',$lowerSql)) {
             $this->error = sprintf('You need an exec %s, but it is not a find %s', $method, $method);
             return false;
         }
