@@ -163,6 +163,9 @@ class SPDO extends \PDO
             return false;
         }
         $this->reset();
+        if (!$this->checkExec($sql, 'select')) {
+            return false;
+        }
         $statement = $this->prepare($sql, array(\PDO::ATTR_CURSOR => $this->attr_cursor));
         $res = $statement->execute($this->getBuildData($data));
         if (!empty($res)) {
@@ -185,6 +188,9 @@ class SPDO extends \PDO
             return false;
         }
         $this->reset();
+        if (!$this->checkExec($sql, 'select')) {
+            return false;
+        }
         $statement = $this->prepare($sql, array(\PDO::ATTR_CURSOR => $this->attr_cursor));
         $res = $statement->execute($this->getBuildData($data));
         if (!empty($res)) {
@@ -207,6 +213,9 @@ class SPDO extends \PDO
             return false;
         }
         $this->reset();
+        if (!$this->checkExec($sql, 'update')) {
+            return false;
+        }
         $statement = $this->prepare($sql, array(\PDO::ATTR_CURSOR => $this->attr_cursor));
         $res = $statement->execute($this->getBuildData($data));
         if (!empty($res)) {
@@ -230,6 +239,9 @@ class SPDO extends \PDO
             return false;
         }
         $this->reset();
+        if (!$this->checkExec($sql, 'delete')) {
+            return false;
+        }
         $statement = $this->prepare($sql, array(\PDO::ATTR_CURSOR => $this->attr_cursor));
         $res = $statement->execute($this->getBuildData($data));
         if (!empty($res)) {
@@ -260,6 +272,9 @@ class SPDO extends \PDO
             return false;
         }
         $this->reset();
+        if (!$this->checkExec($sql, 'insert')) {
+            return false;
+        }
         $statement = $this->prepare($sql, array(\PDO::ATTR_CURSOR => $this->attr_cursor));
         $res = $statement->execute($this->getBuildData($data));
         if (!empty($res)) {
@@ -277,6 +292,16 @@ class SPDO extends \PDO
             $tmp[':' . $key] = $val;
         }
         return $tmp;
+    }
+
+    protected function checkExec($sql, $method)
+    {
+        $lowerSql = strtolower($sql);
+        if (!strstr($lowerSql, $method . ' ')) {
+            $this->error = sprintf('You need an exec %s, but it is not a find %s', $method, $method);
+            return false;
+        }
+        return true;
     }
 
 }
