@@ -304,4 +304,8 @@ class SPDO extends \PDO
         return true;
     }
 
+    public function table($tableName = ''){
+        return new FastEngine($this, $tableName);
+    }
+
 }

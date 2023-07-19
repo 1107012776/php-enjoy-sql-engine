@@ -20,7 +20,6 @@ trait ParsingTrait
     protected $_condition_bind = [];
     protected $tableName = '';
     protected $_condition = [];
-
     /**
      * 参数解析绑定
      * @param $key
